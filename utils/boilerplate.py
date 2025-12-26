@@ -1,6 +1,6 @@
 data = []
 
-with open('day3/input.txt', 'r') as file:
+with open('input.txt', 'r') as file:
     for line in file:
         data.append(line)
 
