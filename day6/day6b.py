@@ -60,19 +60,3 @@ for i in range(len(op_data)):
     scores.append(score) 
     print(scores)   
 print(sum(scores))
-#    score = 0
-#    for j in range(len(data)):
-#        if(j == 0):
-#            score = int(data[j][i])
-#        else:
-#            if(operators[0][i] == "*"):
-#                score *= int(data[j][i])
-#            elif(operators[0][i] == "+"):
-#                score += int(data[j][i])
-#            elif(operators[0][i] == "-"):
-#                score -= int(data[j][i])
-#            elif(operators[0][i] == "/"):
-#                score /= int(data[j][i])
-#    scores.append(score)
-#    print(score)
-#print(sum(scores))
