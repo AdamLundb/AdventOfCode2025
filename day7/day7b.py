@@ -41,14 +41,19 @@ def add_beams_from_previous_level(beam_indexes_from_last_level, line_of_current_
             new_time_line.update_TimeLine(Level(current_TimeLine.level + 1,new_line))
             timelines.append(new_time_line)
         if(new_line[beam_indexes_from_last_level[i]] == "^"):
-            left_line = new_line[beam_indexes_from_last_level[i] + 1] = 'S'
-            new_time_line = TimeLine(current_TimeLine.levels, current_TimeLine.level)
-            new_time_line.update_TimeLine(Level(current_TimeLine.level + 1, left_line))
-            timelines.append(new_time_line)
-            right_line = new_line[beam_indexes_from_last_level[i] - 1] = 'S'
-            new_time_line = TimeLine(current_TimeLine.levels, current_TimeLine.level)
-            new_time_line.update_TimeLine(Level(current_TimeLine.level + 1, right_line))
-            timelines.append(new_time_line)
+            for j in range(2):
+                if(j == 0):
+                    left_line = new_line[:]
+                    left_line[beam_indexes_from_last_level[i] - 1] = 'S'
+                    new_time_line = TimeLine(current_TimeLine.levels, current_TimeLine.level)
+                    new_time_line.update_TimeLine(Level(current_TimeLine.level + 1, left_line))
+                    timelines.append(new_time_line)
+                if(j == 1):
+                    right_line = new_line[:]
+                    right_line[beam_indexes_from_last_level[i] + 1] = 'S'
+                    new_time_line = TimeLine(current_TimeLine.levels, current_TimeLine.level)
+                    new_time_line.update_TimeLine(Level(current_TimeLine.level + 1, right_line))
+                    timelines.append(new_time_line)
     print(len(timelines))
     return timelines
 
