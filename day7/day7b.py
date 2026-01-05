@@ -1,3 +1,5 @@
+import copy
+
 class Level:
     def __init__(self, lvl, layout_string):
         self.level = lvl
@@ -31,8 +33,8 @@ class TimeLine:
 
 def add_beams_from_previous_level(beam_indexes_from_last_level, line_of_current_level, current_TimeLine, timelines):
     new_line = list(line_of_current_level)
-    print(len(timelines))
-    current_TimeLine.print_timeline()
+    #print(len(timelines))
+    #nt_TimeLine.print_timeline()
     for i in range(len(beam_indexes_from_last_level)):
         #print(new_line, beam_indexes_from_last_level[i], i)
         if(new_line[beam_indexes_from_last_level[i]] != "^"):
@@ -43,18 +45,18 @@ def add_beams_from_previous_level(beam_indexes_from_last_level, line_of_current_
         if(new_line[beam_indexes_from_last_level[i]] == "^"):
             for j in range(2):
                 if(j == 0):
-                    left_line = new_line[:]
+                    left_line = copy.deepcopy(new_line)
                     left_line[beam_indexes_from_last_level[i] - 1] = 'S'
-                    new_time_line = TimeLine(current_TimeLine.levels, current_TimeLine.level)
+                    new_time_line = copy.deepcopy(TimeLine(current_TimeLine.levels, current_TimeLine.level))
                     new_time_line.update_TimeLine(Level(current_TimeLine.level + 1, left_line))
                     timelines.append(new_time_line)
                 if(j == 1):
-                    right_line = new_line[:]
+                    right_line = copy.deepcopy(new_line)
                     right_line[beam_indexes_from_last_level[i] + 1] = 'S'
-                    new_time_line = TimeLine(current_TimeLine.levels, current_TimeLine.level)
+                    new_time_line = copy.deepcopy(TimeLine(current_TimeLine.levels, current_TimeLine.level))
                     new_time_line.update_TimeLine(Level(current_TimeLine.level + 1, right_line))
                     timelines.append(new_time_line)
-    print(len(timelines))
+    #print(len(timelines))
     return timelines
 
 def print_map(data):
@@ -81,8 +83,9 @@ print(Amount_of_lines)
 
 i = 0
 trees = []
-with open('day7/test.txt', 'r') as file:
+with open('day7/input.txt', 'r') as file:
     for line in file:
+        print("Current Level : ", i)
         if(i == 0):
             start_line = list(line[:-1])
             first_level = Level(0, start_line)
